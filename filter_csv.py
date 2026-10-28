@@ -22,7 +22,17 @@ def main():
     #   header. Find the position of args.column within the header, then print every
     #   data row (its values joined by commas) whose value in that column equals
     #   args.value.
+    with open(args.filename) as file:
+        for number, line in enumerate(file, start = 1):
+            line = line.rstrip("\n")
 
+            if args.ignore_case:
+                match = args.pattern.lower() in line.lower()
+            else:
+                match = args.pattern.lower() in line
+
+            if match:
+                print(f"{number}: {line}")
 
 if __name__ == "__main__":
     main()
